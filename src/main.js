@@ -2,11 +2,14 @@ import "@fontsource/geist-sans/400.css";
 import "@fontsource/geist-sans/500.css";
 import "@fontsource/geist-sans/600.css";
 import "@fontsource/geist-mono/400.css";
+import { inject } from "@vercel/analytics";
 import "./style.css";
 import { playIntro } from "./intro.js";
 import { createIntroSound } from "./intro-sound.js";
 import sunIcon from "@phosphor-icons/core/assets/regular/sun.svg?raw";
 import moonIcon from "@phosphor-icons/core/assets/regular/moon.svg?raw";
+
+inject();
 
 const THEME_KEY = "pitstop:theme";
 const THEME_COLORS = { light: "#F6F4E9", dark: "#12130F" };
