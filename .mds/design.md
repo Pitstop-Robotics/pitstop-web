@@ -116,6 +116,8 @@ All sharp: radius 0 on inputs, buttons, and media frames. The only round element
 6. 2.65s: `ROBOTICS` (mono 16px, 0.32em tracking, `--ink-soft`, 6px below the word) fades in under the word, tracking tightening from 0.6em.
 7. 3.2s: `ROBOTICS` fades out (300ms). 3.35s: the word travels to the nav wordmark (translate plus scale measured from both elements, 950ms, ease-in-out) while the overlay's background clears (3.45s, 750ms), so the page and header appear around it. The word fades only in the last quarter of the move, as it lands on the nav wordmark, so the big logo reads as settling into the header. Hero items then fade up (paused until the overlay is removed).
 
+**Intro sound** (`src/intro-sound.js`, Web Audio, synthesized, no files). Cues follow `INTRO_TIMELINE`: low thump as the square pops in, faint tick as "pı" rises, a soft high pip when the dot lands, a rising noise whoosh on the slide, a quiet two-note chime with `ROBOTICS`, and a falling whoosh as the word docks into the nav. Quiet overall (master gain 0.5, cues 0.04 to 0.35). Browsers lock audio until the visitor interacts, so the intro only plays sound when the audio clock is already running (for example a returning visitor on a site the browser trusts); otherwise it stays silent, and cues are never played late. Skipping fades the sound out. No sound under reduced motion (the intro is skipped).
+
 Click or any key fast-forwards the intro (5x). Skipped entirely under reduced motion. Page scroll is locked while it plays.
 
 - Hero items fade up on load, staggered 90ms.

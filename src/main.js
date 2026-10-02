@@ -4,6 +4,7 @@ import "@fontsource/geist-sans/600.css";
 import "@fontsource/geist-mono/400.css";
 import "./style.css";
 import { playIntro } from "./intro.js";
+import { createIntroSound } from "./intro-sound.js";
 import sunIcon from "@phosphor-icons/core/assets/regular/sun.svg?raw";
 import moonIcon from "@phosphor-icons/core/assets/regular/moon.svg?raw";
 
@@ -45,7 +46,10 @@ systemDark.addEventListener("change", (e) => {
   if (!savedTheme()) applyTheme(e.matches ? "dark" : "light");
 });
 
-playIntro(document.querySelector("[data-intro]"), { dockTarget: document.querySelector(".nav__brand .wm") });
+playIntro(document.querySelector("[data-intro]"), {
+  dockTarget: document.querySelector(".nav__brand .wm"),
+  sound: createIntroSound,
+});
 
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
 const SIGNUP_INBOX = "founders@pitstoprobotics.com";

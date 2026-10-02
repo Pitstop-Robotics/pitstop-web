@@ -37,16 +37,25 @@ const SKIP_RATE = 5;
 
 // `dockTarget`: element the word travels into at the end (the nav wordmark). Without one,
 // the word fades in place.
-export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, skippable = true, dockTarget = null } = {}) {
+// `sound`: optional promise of { play(timeline, speed), stop(), close() } (see intro-sound.js).
+export async function playIntro(
+  root,
+  { timeline = INTRO_TIMELINE, speed = 1, skippable = true, dockTarget = null, sound = null } = {}
+) {
   if (!root) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || typeof root.animate !== "function") return root.remove();
 
   const animations = [];
-  const skip = () => animations.forEach((a) => a.updatePlaybackRate(SKIP_RATE));
+  let cues = null;
+  const skip = () => {
+    animations.forEach((a) => a.updatePlaybackRate(SKIP_RATE));
+    cues?.stop();
+    cues = null;
+  };
 
   try {
-    await document.fonts?.ready;
+    [, cues] = await Promise.all([document.fonts?.ready, typeof sound === "function" ? sound().catch(() => null) : null]);
 
     const box = root.querySelector("[data-intro-box]");
     const mark = root.querySelector("[data-intro-mark]");
@@ -92,6 +101,7 @@ export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, sk
       { offset: 1, [prop]: to },
     ];
 
+    cues?.play(timeline, speed);
     play(box, [{ scale: "0.3", opacity: 0 }, { scale: "1", opacity: 1 }], timeline.boxIn, EASE.pop);
     play(box, [{ translate: "0 0" }, { translate: `${-markDx}px 0` }], timeline.slide, EASE.inOut);
     play(box, [{ opacity: 1 }, { opacity: 0 }], timeline.boxOut, "linear", { fill: "forwards" });
@@ -172,6 +182,7 @@ export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, sk
     await Promise.all(animations.map((a) => a.finished));
   } finally {
     window.removeEventListener("keydown", skip);
+    cues?.close();
     root.remove();
   }
 }
