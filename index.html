@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pitstop Robotics | Pi-Scan and Pi-Sim</title>
+    <meta
+      name="description"
+      content="Pitstop Robotics is building Pi-Scan, a robot for vehicle underbody inspection, and Pi-Sim, AI-native simulation for robot cells and automation lines."
+    />
+    <meta name="theme-color" content="#F6F4E9" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="intro" data-intro aria-hidden="true">
+      <div class="intro__stage">
+        <div class="intro__word wm"><span class="intro__box" data-intro-box></span><span class="intro__mark" data-intro-mark>p<span class="intro__i">ı<span class="intro__dot" data-intro-dot></span></span></span><span data-intro-letter>t</span><span data-intro-letter>s</span><span data-intro-letter>t</span><span data-intro-letter>o</span><span data-intro-letter>p</span></div>
+        <p class="intro__sub" data-intro-sub>Robotics</p>
+      </div>
+    </div>
+
+    <header class="nav">
+      <div class="container nav__inner">
+        <a href="/" class="nav__brand" aria-label="Pitstop Robotics home">
+          <span class="wm" aria-hidden="true">p<span class="i-dot">ı</span>tstop</span>
+        </a>
+        <p class="nav__status"><span class="status-dot" aria-hidden="true"></span>In development</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__floor" aria-hidden="true">
+          <div class="hero__plane">
+            <div class="hero__grid"></div>
+            <div class="hero__scan"></div>
+          </div>
+        </div>
+        <div class="container hero__inner">
+          <h1 id="hero-title" class="hero__title reveal-load" style="--i: 0">
+            AI-native tools for <strong>vehicles and factories</strong>.
+          </h1>
+          <p class="hero__sub reveal-load" style="--i: 1">
+            Two products in development: Pi-Scan and Pi-Sim.
+          </p>
+
+          <form class="signup reveal-load" style="--i: 2" novalidate data-signup>
+            <div class="signup__row">
+              <label for="email" class="sr-only">Work email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="you@company.com"
+                aria-describedby="email-msg"
+                required
+              />
+              <button type="submit" class="btn"><span class="btn__label">Get updates</span></button>
+            </div>
+            <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <p id="email-msg" class="signup__msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="products" aria-labelledby="products-title">
+        <div class="container">
+          <h2 id="products-title" class="section-title reveal">What we're building</h2>
+
+          <div class="products__grid">
+            <article class="product product--sim reveal">
+              <div class="media media--wide shadow shadow--sim">
+                <!-- TODO: swap for a real Pi-Sim capture when ready -->
+                <img src="/media/pi-sim-shadow.jpg" alt="" class="shadow__img" loading="lazy" data-media />
+                <img src="/media/pi-sim-shadow.jpg" alt="" class="shadow__ghost" loading="lazy" />
+              </div>
+              <p class="product__status">Proof of concept</p>
+              <h3 class="product__title">Pi-Sim <span>Factory simulation</span></h3>
+              <p class="product__body">
+                Offline programming and virtual commissioning for robot cells and automation lines. Built
+                for AI agents to set up and run, with engineers in control.
+              </p>
+            </article>
+
+            <article class="product product--amr reveal">
+              <div class="media media--tall shadow shadow--scan">
+                <!-- TODO: swap for the Pi-Scan CAD render when ready -->
+                <img src="/media/pi-scan-shadow.jpg" alt="" class="shadow__img" loading="lazy" data-media />
+                <img src="/media/pi-scan-shadow.jpg" alt="" class="shadow__ghost" loading="lazy" />
+              </div>
+              <p class="product__status">In design</p>
+              <h3 class="product__title">Pi-Scan <span>Underbody inspection</span></h3>
+              <p class="product__body">
+                A low-profile robot drives under the vehicle and scans it in one pass. Vision AI turns the
+                scan into a report on rust, damage, and missing parts.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement" aria-label="Our approach">
+        <div class="container">
+          <p class="statement__text reveal">
+            Underbody checks still mean a flashlight and a creeper. Robot cells still get debugged on the factory floor.
+            <span>We're building AI-native tools for both.</span>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <img src="/icon.svg" alt="" width="32" height="32" class="footer__icon" />
+        <p>&copy; 2026 Pitstop Robotics</p>
+        <!-- TODO: replace with the real company inbox -->
+        <a href="mailto:hello@pitstoprobotics.com" class="footer__link" data-contact>hello@pitstoprobotics.com</a>
+      </div>
+    </footer>
+  </body>
+</html>

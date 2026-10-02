@@ -1,0 +1,9 @@
+---
+description: Keep .mds/design.md in sync with the site's design language
+alwaysApply: true
+---
+
+- `.mds/design.md` is the source of truth for the website's design language (colors, type, shape, layout, components, motion).
+- Any change that adds or alters design (new section, new component, token change) must update `.mds/design.md` in the same change.
+- When the user asks to change the design language, update `.mds/design.md` first, then the code. Tokens in `src/style.css` `:root` must match it.
+- Use the taste skill (`.agents/skills/design-taste-frontend/SKILL.md`) for UI work.

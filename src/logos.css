@@ -1,0 +1,178 @@
+:root {
+  --mark-accent: var(--accent);
+  --icon-fg: var(--bg);
+  --icon-accent: #5b9bff;
+}
+
+.board-head {
+  padding-block: 64px 24px;
+}
+
+.board-head h1 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.board-head p {
+  margin-top: 10px;
+  max-width: 60ch;
+  color: var(--ink-soft);
+}
+
+.group-title {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px 40px;
+  margin-top: 24px;
+  padding-bottom: 32px;
+}
+
+.concept h3 {
+  margin-top: 18px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.concept > p {
+  margin-top: 6px;
+  max-width: 52ch;
+  color: var(--ink-soft);
+}
+
+.concept__stage {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.concept__strip {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  height: 96px;
+  color: var(--ink);
+}
+
+.tile + .tile {
+  border-left: 1px solid var(--line);
+}
+
+.tile--dark {
+  --mark-accent: #5b9bff;
+  --icon-fg: var(--ink);
+  --icon-accent: var(--accent);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.mark {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  color: inherit;
+}
+
+.mark--xl {
+  width: 128px;
+  height: 128px;
+}
+
+.mark--lg {
+  width: 60px;
+  height: 60px;
+}
+
+.mark--icon {
+  width: 56px;
+  height: 56px;
+}
+
+.mark--32 {
+  width: 32px;
+  height: 32px;
+}
+
+.mark--16 {
+  width: 16px;
+  height: 16px;
+}
+
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wm--xl {
+  font-size: 84px;
+}
+
+.wm--lock {
+  font-size: 48px;
+}
+
+.wm--icon {
+  font-size: 44px;
+}
+
+.wm--32 {
+  font-size: 26px;
+}
+
+.wm--16 {
+  font-size: 13px;
+}
+
+.wm-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.wm-sub {
+  padding-left: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.46em;
+  color: var(--muted);
+}
+
+.wm-muted {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.i-dot--beam::before {
+  top: 0.06em;
+  width: 0.3em;
+  height: 0.22em;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.i-dot--bar::before {
+  top: 0.14em;
+  width: 0.34em;
+  height: 0.07em;
+}
+
+@media (max-width: 860px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+}

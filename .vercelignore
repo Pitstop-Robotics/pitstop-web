@@ -1,0 +1,8 @@
+node_modules
+dist
+.agents
+.cursor
+.mds
+.rules
+logos
+skills-lock.json
