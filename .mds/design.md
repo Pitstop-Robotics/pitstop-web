@@ -121,7 +121,7 @@ All sharp: radius 0 on inputs, buttons, and media frames. The only round element
 Click or any key fast-forwards the intro (5x). Skipped entirely under reduced motion. Page scroll is locked while it plays.
 
 - Hero items fade up on load, staggered 90ms.
-- Hero floor: the grid scrolls toward the viewer one cell every 3s (linear, endless). The scan line sweeps from horizon to front over 5s, then pauses about 2s before the next pass (7s cycle), fading in and out at the ends. Transform and opacity only. Grid static and scan hidden under reduced motion.
+- Hero floor: the grid scrolls toward the viewer one cell every 3s (linear, endless). The scan line completes one horizon-to-front pass every 2s, fading in and out at the ends. Transform and opacity only. Grid static and scan hidden under reduced motion.
 - Sections and product cards fade up 20px when they enter the viewport (IntersectionObserver).
 - Shadow drift: Pi-Scan's shadow drives side to side (translateX about 6%, 9s, ease-in-out, alternate) with the ghost trailing behind it, reading as motion blur. Pi-Sim's shadow pans like a slow orbiting camera (translate plus slight scale, 14s, alternate) with the ghost offset the other way. Transform only. Static under reduced motion.
 - All motion turns off under `prefers-reduced-motion: reduce`.
@@ -190,7 +190,7 @@ All directions share these rules:
 
 ## Copy rules
 
-- State the stage plainly. Pi-Sim status reads "Just connecting the dots" (founder's wording for proof of concept). Pi-Scan reads "In design".
+- State the stage plainly. Pi-Sim status reads "Connecting the dots" (founder's wording for proof of concept). Pi-Scan reads "In design".
 - Say what each product does and the outcome, not a full feature list. No accuracy claims, no "replaces tool X" claims until there is proof.
 - No customer logos, deployments, or numbers the company can't back.
 - One call to action on the page: "Get updates".
