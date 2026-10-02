@@ -9,6 +9,13 @@
   --line: #dedac9;
   --accent: #0e50b3;
   --accent-soft: #61a6d1;
+  --placeholder: #6e6b62;
+  --field-hover: #cdc8b4;
+  --btn-hover: #2a2926;
+  --glow: #fffef8;
+  --error: #b3261e;
+  --shadow-blend: multiply;
+  --shadow-tone: grayscale(0.3);
 
   --font-sans: "Geist Sans", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
@@ -19,6 +26,72 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #12130f;
+  --bg-raised: #1a1b16;
+  --field: #171813;
+  --ink: #f2f0e4;
+  --ink-soft: #c9c6b8;
+  --muted: #9a978a;
+  --line: #2a2b24;
+  --accent: #5b9bff;
+  --placeholder: #858276;
+  --field-hover: #3a3b33;
+  --btn-hover: #dad7ca;
+  --glow: #1d1e19;
+  --error: #f2877e;
+  --shadow-blend: screen;
+  --shadow-tone: invert(1) grayscale(1);
+
+  color-scheme: dark;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+
+/* Theme toggle */
+.nav__end {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin-right: -6px;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+}
+
+.theme-toggle:hover {
+  color: var(--ink);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer__icon--dark,
+[data-theme="dark"] .footer__icon--light {
+  display: none;
+}
+
+[data-theme="dark"] .footer__icon--dark {
+  display: block;
 }
 
 *,
@@ -166,7 +239,7 @@ figure {
   inset: 0;
   background: radial-gradient(
     560px 340px at 50% 38%,
-    color-mix(in srgb, #fffef8 85%, transparent),
+    color-mix(in srgb, var(--glow) 85%, transparent),
     transparent 70%
   );
   pointer-events: none;
@@ -291,11 +364,11 @@ figure {
 }
 
 .signup input::placeholder {
-  color: #6e6b62;
+  color: var(--placeholder);
 }
 
 .signup input:hover {
-  border-color: #cdc8b4;
+  border-color: var(--field-hover);
 }
 
 .signup input:focus-visible {
@@ -305,8 +378,8 @@ figure {
 }
 
 .signup[data-state="error"] input {
-  border-color: #b3261e;
-  box-shadow: inset 0 0 0 1px #b3261e;
+  border-color: var(--error);
+  box-shadow: inset 0 0 0 1px var(--error);
 }
 
 .btn {
@@ -325,7 +398,7 @@ figure {
 }
 
 .btn:hover {
-  background: #2a2926;
+  background: var(--btn-hover);
 }
 
 .btn:active {
@@ -334,7 +407,7 @@ figure {
 
 .btn:disabled {
   cursor: progress;
-  background: #2a2926;
+  background: var(--btn-hover);
 }
 
 .btn {
@@ -386,7 +459,7 @@ figure {
 }
 
 .signup[data-state="error"] .signup__msg {
-  color: #b3261e;
+  color: var(--error);
 }
 
 .signup[data-state="success"] .signup__msg {
@@ -465,22 +538,22 @@ figure {
   position: absolute;
   inset: 0;
   scale: 1.15;
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--shadow-blend);
   pointer-events: none;
 }
 
 .shadow__img {
   opacity: 0.55;
-  filter: blur(16px) grayscale(0.3);
+  filter: blur(16px) var(--shadow-tone);
 }
 
 .shadow--sim .shadow__img {
-  filter: blur(14px) grayscale(0.3);
+  filter: blur(14px) var(--shadow-tone);
 }
 
 .shadow__ghost {
   opacity: 0.22;
-  filter: blur(28px) grayscale(0.3);
+  filter: blur(28px) var(--shadow-tone);
 }
 
 .product__title span {

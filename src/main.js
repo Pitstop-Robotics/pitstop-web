@@ -4,6 +4,46 @@ import "@fontsource/geist-sans/600.css";
 import "@fontsource/geist-mono/400.css";
 import "./style.css";
 import { playIntro } from "./intro.js";
+import sunIcon from "@phosphor-icons/core/assets/regular/sun.svg?raw";
+import moonIcon from "@phosphor-icons/core/assets/regular/moon.svg?raw";
+
+const THEME_KEY = "pitstop:theme";
+const THEME_COLORS = { light: "#F6F4E9", dark: "#12130F" };
+const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+const themeToggle = document.querySelector("[data-theme-toggle]");
+
+function savedTheme() {
+  try {
+    return localStorage.getItem(THEME_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]').content = THEME_COLORS[theme];
+  const next = theme === "dark" ? "light" : "dark";
+  themeToggle.innerHTML = theme === "dark" ? sunIcon : moonIcon;
+  themeToggle.setAttribute("aria-label", `Switch to ${next} theme`);
+  themeToggle.title = `Switch to ${next} theme`;
+}
+
+applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+
+themeToggle.addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  try {
+    localStorage.setItem(THEME_KEY, next);
+  } catch {}
+  const animate = document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (animate) document.startViewTransition(() => applyTheme(next));
+  else applyTheme(next);
+});
+
+systemDark.addEventListener("change", (e) => {
+  if (!savedTheme()) applyTheme(e.matches ? "dark" : "light");
+});
 
 playIntro(document.querySelector("[data-intro]"));
 

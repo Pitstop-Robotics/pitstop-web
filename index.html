@@ -10,6 +10,15 @@
     />
     <meta name="theme-color" content="#F6F4E9" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        var saved = null;
+        try { saved = localStorage.getItem("pitstop:theme"); } catch (e) {}
+        var dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.querySelector('meta[name="theme-color"]').content = dark ? "#12130F" : "#F6F4E9";
+      })();
+    </script>
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
@@ -25,7 +34,10 @@
         <a href="/" class="nav__brand" aria-label="Pitstop Robotics home">
           <span class="wm" aria-hidden="true">p<span class="i-dot">ı</span>tstop</span>
         </a>
-        <p class="nav__status"><span class="status-dot" aria-hidden="true"></span>In development</p>
+        <div class="nav__end">
+          <p class="nav__status"><span class="status-dot" aria-hidden="true"></span>In development</p>
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme"></button>
+        </div>
       </div>
     </header>
 
@@ -113,7 +125,8 @@
 
     <footer class="footer">
       <div class="container footer__inner">
-        <img src="/icon.svg" alt="" width="32" height="32" class="footer__icon" />
+        <img src="/icon.svg" alt="" width="32" height="32" class="footer__icon footer__icon--light" />
+        <img src="/icon-dark.svg" alt="" width="32" height="32" class="footer__icon footer__icon--dark" />
         <p>&copy; 2026 Pitstop Robotics</p>
         <!-- TODO: replace with the real company inbox -->
         <a href="mailto:hello@pitstoprobotics.com" class="footer__link" data-contact>hello@pitstoprobotics.com</a>

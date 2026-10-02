@@ -16,7 +16,9 @@ Introduction page for an early-stage robotics company with two separate products
 
 ## Theme
 
-Light only, by explicit request (soft off-white). No dark mode. `color-scheme: light`.
+Light and dark. The default follows the visitor's system or browser setting (`prefers-color-scheme`) and keeps following it live. A small icon button at the top right of the nav (sun or moon, 16px, `--muted`, `--ink` on hover, no border) switches theme; the choice is remembered in `localStorage` (`pitstop:theme`) and then overrides the system setting. An inline script in `<head>` sets `data-theme` on `<html>` before first paint, so there is no flash. Switching crossfades through the View Transitions API where available (not under reduced motion). `color-scheme` and `<meta name="theme-color">` follow the active theme.
+
+Dark is the same design inverted onto a warm near-black, not a new look: same single accent family, same hierarchy, no pure black or white.
 
 ## Color
 
@@ -40,6 +42,28 @@ Light only, by explicit request (soft off-white). No dark mode. `color-scheme: l
 
 Rules: one accent across the page. No other hues. No pure black or pure white.
 
+Semantic tokens added so both themes can swap them: `--placeholder` (light `#6E6B62`), `--field-hover` (light `#CDC8B4`), `--btn-hover` (light `#2A2926`), `--glow` (light `#FFFEF8`), `--error` (light `#B3261E`).
+
+### Dark theme (`[data-theme="dark"]`)
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--bg` | `#12130F` | Page background. Warm near-black |
+| `--bg-raised` | `#1A1B16` | Image frames |
+| `--field` | `#171813` | Input background |
+| `--ink` | `#F2F0E4` | Headlines, primary button fill (button text becomes `--bg`) |
+| `--ink-soft` | `#C9C6B8` | Body copy |
+| `--muted` | `#9A978A` | Secondary text (about 6.6:1 on `--bg`) |
+| `--line` | `#2A2B24` | Hairlines |
+| `--accent` | `#5B9BFF` | Logo light blue, the on-dark accent from the logo rules |
+| `--placeholder` | `#858276` | |
+| `--field-hover` | `#3A3B33` | |
+| `--btn-hover` | `#DAD7CA` | |
+| `--glow` | `#1D1E19` | Hero glow, a lighter near-black |
+| `--error` | `#F2877E` | |
+
+Shadow media in dark: images are inverted, fully desaturated, and blended with `screen` instead of `multiply`, so the silhouettes read as light shapes on the dark frame. Footer icon swaps to `icon-dark.svg` (light square, dark "pi", `#0E50B3` dot).
+
 ## Typography
 
 - Sans: Geist Sans 400, 500, 600 (self-hosted via `@fontsource/geist-sans`).
@@ -58,7 +82,7 @@ All sharp: radius 0 on inputs, buttons, and media frames. The only round element
 ## Layout
 
 - Container max 1200px, gutter `clamp(20px, 4vw, 40px)`.
-- Nav: 68px, sticky, translucent `--bg` with blur, hairline bottom. Wordmark left (26px), status right.
+- Nav: 68px, sticky, translucent `--bg` with blur, hairline bottom. Wordmark left (26px), status and theme toggle (28px hit area) right.
 - Hero: centered, fills the first viewport under the nav. No logo (the load intro introduces the brand): headline (`clamp(2.25rem, 5vw, 4rem)`), mono sub line, email form. Soft radial glow of brighter off-white behind the headline. Behind the glow: a perspective floor grid (48px cells, lines `--ink` at 10%, a 420px-deep plane tilted 64deg under a 640px perspective, starting just under the headline, faded out toward the horizon, the sides, and the bottom) and a thin `--accent` scan line that passes over the floor. The grid stands for the simulator floor, the scan for the inspection pass. Decorative, `aria-hidden`.
 - Products: section title, then a `7fr 5fr` grid. Pi-Sim (wide 16:10 frame) left, Pi-Scan (4:5 frame, offset down) right. Each: blurred shadow media, mono status in accent, title (product name plus a muted 400-weight category), body.
 - Statement: one large left-aligned paragraph.
@@ -102,7 +126,9 @@ Click or any key fast-forwards the intro (5x). Skipped entirely under reduced mo
 
 ## Assets
 
-- `public/icon.svg`: the icon, used in the footer.
+- `public/icon.svg`: the icon, used in the footer (light theme).
+- `public/icon-dark.svg`: the icon for the dark theme.
+- Theme toggle glyphs: Phosphor `sun` and `moon` (regular), from `@phosphor-icons/core`.
 - `public/favicon.svg`: same artwork as the icon, used as the browser favicon.
 - `logos/pitstop-wordmark.svg`, `logos/pitstop-icon.svg`: master logo files, text outlined to paths (Geist Sans 600). Use these outside the website.
 - `public/media/pi-sim-shadow.jpg`: generated silhouette of a robot cell in a simulator viewport (1024x576). Shown blurred only. Replace with a real Pi-Sim capture when ready.
