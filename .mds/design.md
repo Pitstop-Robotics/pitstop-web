@@ -62,7 +62,7 @@ Semantic tokens added so both themes can swap them: `--placeholder` (light `#6E6
 | `--glow` | `#1D1E19` | Hero glow, a lighter near-black |
 | `--error` | `#F2877E` | |
 
-Shadow media in dark: images are inverted, fully desaturated, and blended with `screen` instead of `multiply`, so the silhouettes read as light shapes on the dark frame. Footer icon swaps to `icon-dark.svg` (light square, dark "pi", `#0E50B3` dot).
+Shadow media in dark: images are inverted, fully desaturated, and blended with `screen` instead of `multiply`, so the silhouettes read as light shapes on the dark frame. Footer icon and the product-name marks swap to `icon-dark.svg` (light square, dark "pi", `#0E50B3` dot), via `.only-light` / `.only-dark`.
 
 ## Typography
 
@@ -84,7 +84,7 @@ All sharp: radius 0 on inputs, buttons, and media frames. The only round element
 - Container max 1200px, gutter `clamp(20px, 4vw, 40px)`.
 - Nav: 68px, sticky, translucent `--bg` with blur, hairline bottom. Wordmark left (26px), status and theme toggle (28px hit area) right.
 - Hero: centered, fills the first viewport under the nav. No logo (the load intro introduces the brand): headline (`clamp(2.25rem, 5vw, 4rem)`), mono sub line, email form. Soft radial glow of brighter off-white behind the headline. Behind the glow: a perspective floor grid (48px cells, lines `--ink` at 10%, a 420px-deep plane tilted 64deg under a 640px perspective, starting just under the headline, faded out toward the horizon, the sides, and the bottom) and a thin `--accent` scan line that passes over the floor. The grid stands for the simulator floor, the scan for the inspection pass. Decorative, `aria-hidden`.
-- Products: section title, then a `7fr 5fr` grid. Pi-Sim (wide 16:10 frame) left, Pi-Scan (4:5 frame, offset down) right. Each: blurred shadow media, mono status in accent, title (product name plus a muted 400-weight category), body.
+- Products: section title, then a `7fr 5fr` grid. Pi-Sim (wide 16:10 frame) left, Pi-Scan (4:5 frame, offset down) right. Each: blurred shadow media, mono status in accent, title, body. Title: the "pi" icon (0.95em square, `.pi-mark`, theme-swapped), then "Sim" or "Scan" in text, then a muted 400-weight category. Screen readers get "Pi-Sim" / "Pi-Scan" through a visually hidden "Pi-". The hero sub line keeps the names as plain text ("Pi-Scan and Pi-Sim"); the mark is only used in the product titles.
 - Statement: one large left-aligned paragraph.
 - Footer: icon (32px), copyright, contact email.
 - Sections separated by a 1px `--line` top border, vertical padding `clamp(80px, 10vw, 140px)`.
@@ -114,7 +114,7 @@ All sharp: radius 0 on inputs, buttons, and media frames. The only round element
 4. 1.65s: square and "pı" slide left together to the wordmark's position. "tstop" letters slide out from behind the square's right edge, farthest letter first (50ms stagger), so letters never cross.
 5. 2.35s: the square fades out (450ms, linear). "pı" flips to `--ink` and the dot to `--accent` in a quick switch at the fade's midpoint (42% to 58%), not a slow crossfade, which would pass through grey-on-grey and make the letters vanish.
 6. 2.65s: `ROBOTICS` (mono 16px, 0.32em tracking, `--ink-soft`, 6px below the word) fades in under the word, tracking tightening from 0.6em.
-7. 3.35s: word lifts and fades; 3.55s: overlay fades, revealing the hero. Hero items then fade up (paused until the overlay is removed).
+7. 3.2s: `ROBOTICS` fades out (300ms). 3.35s: the word travels to the nav wordmark (translate plus scale measured from both elements, 950ms, ease-in-out) while the overlay's background clears (3.45s, 750ms), so the page and header appear around it. The word fades only in the last quarter of the move, as it lands on the nav wordmark, so the big logo reads as settling into the header. Hero items then fade up (paused until the overlay is removed).
 
 Click or any key fast-forwards the intro (5x). Skipped entirely under reduced motion. Page scroll is locked while it plays.
 
@@ -188,7 +188,7 @@ All directions share these rules:
 
 ## Copy rules
 
-- State the stage plainly: Pi-Sim is a proof of concept, Pi-Scan is in design.
+- State the stage plainly. Pi-Sim status reads "Just connecting the dots" (founder's wording for proof of concept). Pi-Scan reads "In design".
 - Say what each product does and the outcome, not a full feature list. No accuracy claims, no "replaces tool X" claims until there is proof.
 - No customer logos, deployments, or numbers the company can't back.
 - One call to action on the page: "Get updates".

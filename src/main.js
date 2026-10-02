@@ -45,7 +45,7 @@ systemDark.addEventListener("change", (e) => {
   if (!savedTheme()) applyTheme(e.matches ? "dark" : "light");
 });
 
-playIntro(document.querySelector("[data-intro]"));
+playIntro(document.querySelector("[data-intro]"), { dockTarget: document.querySelector(".nav__brand .wm") });
 
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
 const SIGNUP_INBOX = "founders@pitstoprobotics.com";

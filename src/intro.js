@@ -28,13 +28,16 @@ export const INTRO_TIMELINE = {
   letterStagger: 50,
   boxOut: [2350, 450],
   subIn: [2650, 600],
-  exit: [3350, 400],
-  fadeOut: [3550, 400],
+  subOut: [3200, 300],
+  dock: [3350, 950],
+  bgOut: [3450, 750],
 };
 
 const SKIP_RATE = 5;
 
-export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, skippable = true } = {}) {
+// `dockTarget`: element the word travels into at the end (the nav wordmark). Without one,
+// the word fades in place.
+export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, skippable = true, dockTarget = null } = {}) {
   if (!root) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce || typeof root.animate !== "function") return root.remove();
@@ -50,7 +53,7 @@ export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, sk
     const dot = root.querySelector("[data-intro-dot]");
     const sub = root.querySelector("[data-intro-sub]");
     const letters = [...root.querySelectorAll("[data-intro-letter]")];
-    const stage = mark.parentElement.parentElement;
+    const word = mark.parentElement;
 
     const css = getComputedStyle(root);
     const ink = css.getPropertyValue("--ink").trim();
@@ -135,10 +138,31 @@ export async function playIntro(root, { timeline = INTRO_TIMELINE, speed = 1, sk
       );
     }
 
-    play(stage, [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(-10px)" }], timeline.exit, EASE.in, {
+    // The word's layout box is already the final wordmark (children animate with transforms),
+    // so measuring now gives the exact travel to the nav wordmark.
+    const from = word.getBoundingClientRect();
+    const to = dockTarget?.getBoundingClientRect();
+    const dock = to?.width
+      ? `translate(${to.left + to.width / 2 - (from.left + from.width / 2)}px, ${
+          to.top + to.height / 2 - (from.top + from.height / 2)
+        }px) scale(${to.width / from.width})`
+      : "translateY(-10px)";
+
+    if (sub) play(sub, [{ opacity: 1 }, { opacity: 0 }], timeline.subOut, "linear", { fill: "forwards" });
+    play(
+      word,
+      [
+        { offset: 0, transform: "none", opacity: 1 },
+        { offset: 0.75, opacity: 1 },
+        { offset: 1, transform: dock, opacity: 0 },
+      ],
+      timeline.dock,
+      EASE.inOut,
+      { fill: "forwards" }
+    );
+    play(root, [{ backgroundColor: getComputedStyle(root).backgroundColor }, { backgroundColor: "transparent" }], timeline.bgOut, EASE.inOut, {
       fill: "forwards",
     });
-    play(root, [{ opacity: 1 }, { opacity: 0 }], timeline.fadeOut, EASE.inOut, { fill: "forwards" });
 
     if (skippable) {
       root.addEventListener("pointerdown", skip, { once: true });

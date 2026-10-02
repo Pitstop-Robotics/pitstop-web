@@ -85,13 +85,31 @@
   fill: currentColor;
 }
 
-.footer__icon--dark,
-[data-theme="dark"] .footer__icon--light {
+.only-dark,
+[data-theme="dark"] .only-light {
   display: none;
 }
 
-[data-theme="dark"] .footer__icon--dark {
+[data-theme="dark"] .only-dark {
   display: block;
+}
+
+/* Product name: "pi" icon, then the name in text */
+.pi-name {
+  white-space: nowrap;
+}
+
+.pi-mark {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.14em;
+  vertical-align: -0.12em;
+}
+
+.pi-mark img {
+  width: 100%;
+  height: 100%;
 }
 
 *,
@@ -556,7 +574,7 @@ figure {
   filter: blur(28px) var(--shadow-tone);
 }
 
-.product__title span {
+.product__kind {
   margin-left: 6px;
   font-weight: 400;
   color: var(--muted);
