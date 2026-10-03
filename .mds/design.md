@@ -137,10 +137,15 @@ Click or any key fast-forwards the intro (5x). Skipped entirely under reduced mo
 - `public/media/pi-scan-shadow.jpg`: generated silhouette of a low-profile AMR (768x1024). Shown blurred only. Replace with the CAD render when ready.
 - `public/og.png`: the social share card (1200x630). The wordmark alone, 620px wide and centered on `--bg` (`#F6F4E9`), composed from the `logos/pitstop-wordmark` master. Light theme only; it is a static file, so it does not follow the visitor's theme.
 - `public/sitemap.xml`, `public/robots.txt`: served from the site root. The sitemap lists the one page, `https://www.pitstoprobotics.com/`; `robots.txt` allows all crawlers and points at the sitemap.
+- `public/logo-512.png`: the icon as a 512x512 raster, used only as the `Organization` logo in structured data. Search engines want a raster logo, so this exists alongside the SVG icon.
 
 ## Metadata
 
 The canonical host is `https://www.pitstoprobotics.com/` (the apex redirects to `www`), set in `<head>` as `rel="canonical"` and `og:url`. Open Graph and Twitter (`summary_large_image`) tags reuse the page title and meta description, with `public/og.png` as the card image. Any change to the title or description should be made in all three places together.
+
+The title and description are written for search, not for the brand: they lead with what buyers look for ("underbody inspection", "robot simulation") rather than the product names, because `Pi-Scan` and `Pi-Sim` have no search volume yet. Title stays under 60 characters and the description between 120 and 155, so neither is truncated in results. The product names still carry the brand on the page itself.
+
+A JSON-LD `@graph` in `<head>` declares an `Organization` (name, url, email, description, logo, `knowsAbout`) and a `WebSite` that points at it. It claims nothing the page does not support: no social `sameAs` profiles, no addresses, and no `Product` or `Offer` entries, because both products are pre-release and nothing is for sale. Add `sameAs` once company profiles exist, and keep the description in step with the meta description.
 
 ## Logo
 
